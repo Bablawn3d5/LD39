@@ -188,6 +188,17 @@ window.onload = function() {
 
   var debugLogging = false;
   var DATA = Objects.getYarnDATA();
+  var hint = 0;
+  var hints = [
+  "(BAD END. No unlocks for u)",
+  "You can do it. Just keep trying. Just find the right words!",
+  "Sometimes you just gotta power though till the end.",
+  "Don't give up. I believe in you.",
+  "If I'm in the right mood I'll be able to do anything",
+  "Maybe even a grow a extra limb would help?",
+  "Don't give up. I believe in you.",
+  "Even if you don't believe in yourself, I'll beleive in you!",
+  ]
 
   function ENDING (name) {
     text.text = "Type START to begin a new game";
@@ -197,7 +208,9 @@ window.onload = function() {
       acheivos[1].got = true;
     } else if ( name == "DIDNOTHING" ) {
       eventText.colors = [];
-      eventText.text = "Oops, I couldn't hold that bar up any longer. (BAD END. No unlocks for u)";
+      eventText.text = "Oops, I couldn't hold that bar up any longer. " + hints[hint];
+      hint++;
+      hint = hint % hints.length;
     } else if ( name == "ZEN" ) {
       acheivos[2].got = true;
 
