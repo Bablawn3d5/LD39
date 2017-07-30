@@ -98,7 +98,7 @@ window.onload = function() {
           function(n){ return (n != undefined) && (n != "") });
     if (actionRegex && texts.length != 0) {
         actions.push(new Objects.action({
-          match: new RegExp(actionRegex),
+          match: new RegExp(actionRegex, 'i'),
           texts: texts
         }));
     }
