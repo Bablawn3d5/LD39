@@ -62,7 +62,7 @@ window.onload = function() {
     // Re-map raw JSON to some useful obj
     let obj = {}
     for(let i = 0; i < YarnData.length; i++) {
-      obj[YarnData[i].title] = YarnData[i];
+      obj[YarnData[i].title.toUpperCase()] = YarnData[i];
     };
 
     // Use hardcoded START key as the indicator of where to begin parsing.
@@ -87,7 +87,7 @@ window.onload = function() {
     for(let i = 0; i < linkTexts.length; i++) {
       const match = linkTexts[i].match(/(.*?)\s*\[\[(.*)\]\]\s*$/);
       const regex = match[1];
-      const nextCard = match[2];
+      const nextCard = match[2].toUpperCase();
       const conditional = regex.match(/<<\s*(.*)\s*>>/);
       if( conditional ) {
 
@@ -175,18 +175,8 @@ window.onload = function() {
     input.focusOutOnEnter = true;
     //start with focus on the element
     input.startFocus();
-    defaultAction = new Objects.action({
-      match: /.*/,
-      texts: [
-      "I don't know what you mean",
-      "Uhh What?",
-      "HUH?",
-      "I don't have that kind of thing to do that",
-      "Does it look like I can do that?",
-      ]
-    });
-
     actions = Objects.parseData(DATA);
+    defaultAction = actions.splice(actions.indexOf(function(e) { e.title == "DEFAULT" }), 1);
     currentAction = defaultAction;
   }
 
