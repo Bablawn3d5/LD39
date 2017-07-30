@@ -350,7 +350,7 @@ window.onload = function() {
     for(let i=0; i < conditionals.length; i++) {
       let condAction = conditionals[i];
       if(eval(condAction.cond) == true) {
-        console.log("MET CONDITION FOR: " + condAction.title);
+        console.log("MET CONDITION FOR: " + condAction.title + " rege: " + condAction.regex);
         // Remove conditional action and add real aciton
         removeCard(condAction.title);
         addCard(condAction.title, condAction.regex)
