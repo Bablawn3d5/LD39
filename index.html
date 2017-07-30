@@ -185,6 +185,8 @@ window.onload = function() {
   var inGame = false;
 
   var face;
+  var group;
+  var BG;
 
   var debugLogging = false;
   var DATA = Objects.getYarnDATA();
@@ -281,6 +283,7 @@ window.onload = function() {
     game.load.crossOrigin = "Anonymous"
     // Assets here.
     game.load.image('bg', 'assets/main.png');
+    game.load.image('bg2', 'assets/main2.png');
     game.load.image('title', 'assets/title2.png');
     game.load.image('invis', 'assets/invis.png');
     game.load.spritesheet('balls', 'assets/ocnfetti.png', 17, 17);
@@ -292,7 +295,9 @@ window.onload = function() {
     game.stage.backgroundColor = '#000010';
     game.time.advancedTiming = true;
     game.time.desiredFps = 60;
-    let bg = game.add.sprite(0, 0, 'bg');
+
+    group = game.add.group();
+    BG = group.create(0, 0, 'bg');
     titleScreen = game.add.sprite(0, 0, 'title');
     face = game.add.sprite(96*4, 30*4, 'face');
     face.animations.add('idle', [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0], 24, true);
@@ -356,7 +361,7 @@ window.onload = function() {
         icon.animations.add('5', [4], 0, false);
         icon.animations.play('5');
         let a_text = game.add.text(118*4, 57*4,
-          "KINDA FORGOT\nOoops, kidna got carried away\n there.",
+          "KINDA FORGOT\nOoops, kinda got carried away\n there.",
           styleAcheivo);
         acheivos[5] = { s: icon, got: false, text: a_text };
     }
@@ -398,17 +403,6 @@ window.onload = function() {
         button.height = 30;
         acheivos[8] = { s: button, got: false, text: a_text };
     }
-
-
-    // {
-    //     let button = game.add.button(26*4, 98*4, 'icons', function() {
-    //     // open in the same window (like clicking a link)
-    //     window.location.href = "https://phen.itch.io"}, this);
-    //     let a_text = game.add.text(26*4, 98*4,
-    //       "A game by http://phen.itch.io! ",
-    //       styleAcheivo);
-    //     acheivos[7] = { s: button, got: false, text: a_text };
-    // }
 
     input = game.add.inputField(0, 525, {
       font: '18px Arial',
@@ -466,6 +460,9 @@ window.onload = function() {
   function restart() {
     //start with focus on the element
     actions = Objects.parseData(DATA);
+    BG.destroy();
+    BG = group.create(0, 0, 'bg');
+    BG.z = -1;
     input.startFocus();
     input.setText(">");
     inGame = true;
@@ -525,6 +522,10 @@ window.onload = function() {
       input.startFocus();
     }
     else {
+      if ( isARGED == true ){
+        BG.destroy();
+        BG = group.create(0, 0, 'bg2');
+      }
       // In the game
       let playerText = getText();
       const foundAction = actions.find(function(element) {

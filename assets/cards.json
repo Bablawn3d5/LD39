@@ -32,7 +32,7 @@
 	{
 		"title": "LIFT GOOD",
 		"tags": "",
-		"body": "I CAN DO ANYTHING IF I CAN $c1LIFT$c0 THIS $c1BAR$c0!!!!!!\nARRRRRRRRRRRGHHHHHHH YESSSSSSS!\n\n-> CAN DO IT|YES|KEEP AT IT|LIFT << condAction.parent.count > 1 >>[[LIFT WILLPOWER]]",
+		"body": "I CAN DO ANYTHING IF I CAN $c1LIFT$c0 THIS $c1BAR$c0!!!!!! << isARGED = true >>\nARRRRRRRRRRRGHHHHHHH YESSSSSSS!\n\n-> CAN DO IT|YES|KEEP AT IT|LIFT << condAction.parent.count > 1 >>[[LIFT WILLPOWER]]",
 		"position": {
 			"x": 672,
 			"y": -193
