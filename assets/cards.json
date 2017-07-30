@@ -152,7 +152,7 @@
 	{
 		"title": "FLYAWAY",
 		"tags": "",
-		"body": "Freedom at last. << ENDING('FLYAWAY') >>",
+		"body": "I sprouted wings and just flew away from everything. Freedom at last. << ENDING('FLYAWAY') >>",
 		"position": {
 			"x": 1485,
 			"y": 411
@@ -182,7 +182,7 @@
 	{
 		"title": "DID NOTHING",
 		"tags": "",
-		"body": "Welp I couldn't hold on any longer. << ENDING('DIDNOTHING') >>",
+		"body": "Welp I couldn't hold on any longer. I ended up dropping the bar and losing the compeition. << ENDING('DIDNOTHING') >>",
 		"position": {
 			"x": 440,
 			"y": 677

@@ -262,42 +262,6 @@ window.onload = function() {
     let bg = game.add.sprite(0, 0, 'bg');
     titleScreen = game.add.sprite(0, 0, 'title');
 
-    {
-        let icon = game.add.sprite(8*4, 35*4, 'icons');
-        icon.animations.add('1', [0], 0, false);
-        icon.animations.play('1');
-        acheivos[1] = { s: icon, got: false };
-    }
-    {
-        let icon = game.add.sprite(8*4, 56*4, 'icons');
-        icon.animations.add('2', [1], 0, false);
-        icon.animations.play('2');
-        acheivos[2] = { s: icon, got: false };
-    }
-    {
-        let icon = game.add.sprite(8*4, 78*4, 'icons');
-        icon.animations.add('3', [2], 0, false);
-        icon.animations.play('3');
-        acheivos[3] = { s: icon, got: false };
-    }
-    {
-        let icon = game.add.sprite(98*4, 78*4, 'icons');
-        icon.animations.add('4', [3], 0, false);
-        icon.animations.play('4');
-        acheivos[4] = { s: icon, got: false };
-    }
-    {
-        let icon = game.add.sprite(98*4, 56*4, 'icons');
-        icon.animations.add('5', [4], 0, false);
-        icon.animations.play('5');
-        acheivos[5] = { s: icon, got: false };
-    }
-    {
-        let icon = game.add.sprite(97*4, 35*4, 'icons');
-        icon.animations.add('6', [5], 0, false);
-        icon.animations.play('6');
-        acheivos[6] = { s: icon, got: false };
-    }
 
     const style = { font: "18px Arial",
         fill: "#FEFEFE",
@@ -306,6 +270,66 @@ window.onload = function() {
         wordWrap: true, wordWrapWidth: 650
     };
     const styleGrey = { font: "18px Arial", fill: "#8E8E8E" };
+    const styleAcheivo = { font: "14px Arial",
+        fill: "#FEFEFE",
+        boundsAlignH: "left",
+        boundsAlignV: "top",
+        wordWrap: true, wordWrapWidth: 650};
+
+    {
+        let icon = game.add.sprite(8*4, 35*4, 'icons');
+        icon.animations.add('1', [0], 0, false);
+        icon.animations.play('1');
+        let a_text = game.add.text(30*4, 36*4,
+          "THATS SHITTY\nThat's an embarassing way \nto end it eh?",
+          styleAcheivo);
+        acheivos[1] = { s: icon, got: false, text: a_text};
+    }
+    {
+        let icon = game.add.sprite(8*4, 56*4, 'icons');
+        icon.animations.add('2', [1], 0, false);
+        icon.animations.play('2');
+        let a_text = game.add.text(30*4, 57*4,
+          "PERFECT HARMONY\nDeep thoughts and even \ndeeper balance.",
+          styleAcheivo);
+        acheivos[2] = { s: icon, got: false, text: a_text };
+    }
+    {
+        let icon = game.add.sprite(8*4, 78*4, 'icons');
+        icon.animations.add('3', [2], 0, false);
+        icon.animations.play('3');
+        let a_text = game.add.text(30*4, 79*4,
+          "FLEW AWAY\nThese wings will carry you anywhere \nbe free my friend",
+          styleAcheivo);
+        acheivos[3] = { s: icon, got: false, text: a_text };
+    }
+    {
+        let icon = game.add.sprite(98*4, 78*4, 'icons');
+        icon.animations.add('4', [3], 0, false);
+        icon.animations.play('4');
+        let a_text = game.add.text(118*4, 79*4,
+          "STRONGEST ARM CHAMPION\nA true champion",
+          styleAcheivo);
+        acheivos[4] = { s: icon, got: false, text: a_text };
+    }
+    {
+        let icon = game.add.sprite(98*4, 56*4, 'icons');
+        icon.animations.add('5', [4], 0, false);
+        icon.animations.play('5');
+        let a_text = game.add.text(118*4, 57*4,
+          "KINDA FORGOT\nOoops, kidna got carried away\n there.",
+          styleAcheivo);
+        acheivos[5] = { s: icon, got: false, text: a_text };
+    }
+    {
+        let icon = game.add.sprite(97*4, 35*4, 'icons');
+        icon.animations.add('6', [5], 0, false);
+        icon.animations.play('6');
+        let a_text = game.add.text(118*4, 36*4,
+          "HOW DID THAT HAPPEN\nI did say I can do anything right?",
+          styleAcheivo);
+        acheivos[6] = { s: icon, got: false, text: a_text };
+    }
 
     input = game.add.inputField(0, 525, {
       font: '18px Arial',
