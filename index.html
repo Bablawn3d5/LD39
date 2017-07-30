@@ -217,6 +217,7 @@ window.onload = function() {
       if(!acheivos[key].got) {
         acheivos[key].s.visible = true;
       }
+      acheivos[key].text.visible = true;
     });
   }
 
@@ -388,6 +389,7 @@ window.onload = function() {
     // Hide achiveo covers
     Object.keys(acheivos).forEach(function (key) {
       acheivos[key].s.visible = false;
+      acheivos[key].text.visible = false;
     });
     titleScreen.visible = false;
   }
