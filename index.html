@@ -398,7 +398,7 @@ window.onload = function() {
 
     let timerStyle = style;
     timerStyle.boundsAlignH = "right";
-    timeText = game.add.text(0, 0, "Time: {0}".format(Math.round(timeLeft)), timerStyle);
+    timeText = game.add.text(0, 0, "STRENGTH: {0}".format(Math.round(timeLeft)), timerStyle);
     timeText.setTextBounds(0, 0, 768, 56);
 
     // Leave cursor on in input field when you hit enter.
@@ -451,7 +451,7 @@ window.onload = function() {
     input.update();
     if( inGame ) {
       timeLeft -= dt;
-      timeText.text = "Time: {0}".format(Math.round(timeLeft));
+      timeText.text = "STRENGTH: {0}".format(Math.round(timeLeft));
       if(timeLeft < 0) {
         ENDING('DIDNOTHING')
       }

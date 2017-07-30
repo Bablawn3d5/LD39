@@ -14,8 +14,8 @@
 		"tags": "",
 		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI think I can keep $c1LIFT$c0 this up with your advice!!\n\n-> LIFT << condAction.parent.count > 2 >> [[LIFT GOOD]]\n-> THINK|CONTEMPLATE|MEDIDATE [[THINK2]]\n-> (?:DISTRACT|THINK|CONTEMPLATE)\\s*(?:ABOUT\\s*)?(\\w+)\\b [[THINK]]\n-> MEDIDATE\\s*(?:ABOUT\\s*)?(\\w+)\\b [[MEDITATE]]\n-> GROW(\\sa?\\s*\\w+)? << condAction.parent.count > 2 >> [[GROW]]",
 		"position": {
-			"x": 440,
-			"y": 213
+			"x": 438,
+			"y": 195
 		},
 		"colorID": 6
 	},
@@ -32,7 +32,7 @@
 	{
 		"title": "LIFT GOOD",
 		"tags": "",
-		"body": "I $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> CAN DO IT|YES|KEEP AT IT|LIFT << condAction.parent.count > 1 >>[[LIFT WILLPOWER]]",
+		"body": "I CAN DO ANYTHING IF I CAN $c1LIFT$c0 THIS $c1BAR$c0!!!!!!\nARRRRRRRRRRRGHHHHHHH YESSSSSSS!\n\n-> CAN DO IT|YES|KEEP AT IT|LIFT << condAction.parent.count > 1 >>[[LIFT WILLPOWER]]",
 		"position": {
 			"x": 672,
 			"y": -193
@@ -62,7 +62,7 @@
 	{
 		"title": "LIFT WILLPOWER",
 		"tags": "",
-		"body": "I GOT $c1TWO HANDS$c0 ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> (TWO)?\\s*(?:HAND|ARM|HANDED|ARMED) [[TWO ARM]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR [[FOCUS]]\n-> FOCUS [[FOCUS]]\n-> TIME [[FOCUS]]\n-> JOKE [[JOKE2]]\n-> HELP [[HELP2]]\n",
+		"body": "I GOT $c1TWO HANDS$c0 ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> (TWO)?\\s*(?:HAND|ARM|HANDED|ARMED) [[TWO ARM]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR|FOCUS|TIME [[FOCUS]]\n-> JOKE [[JOKE2]]\n-> HELP [[HELP2]]\n",
 		"position": {
 			"x": 589,
 			"y": -624
@@ -152,7 +152,7 @@
 	{
 		"title": "FLYAWAY",
 		"tags": "",
-		"body": "I sprouted wings and just flew away from everything. Freedom at last. << ENDING('FLYAWAY') >>",
+		"body": "I sprouted wings and flew away from everything. True Freedom at last. << ENDING('FLYAWAY') >>",
 		"position": {
 			"x": 1485,
 			"y": 411
@@ -252,7 +252,7 @@
 	{
 		"title": "ONE KNEE",
 		"tags": "",
-		"body": "Okay I drop down on $c1ONE KNEE$c0. Thats a bit of a relief! But I don't know for how long.. << giveTime(60); oneKnee = true; >> \n\n-> ONE KNEE << oneKnee == true >>[[REFUSE]]",
+		"body": "Okay I drop down on $c1ONE KNEE$c0. Thats a bit of a relief! But I don't know for how long.. (+60 STRENGTH!)  << giveTime(60); oneKnee = true; >> \n\n-> ONE KNEE << oneKnee == true >>[[REFUSE]]",
 		"position": {
 			"x": -19,
 			"y": -22
@@ -302,7 +302,7 @@
 	{
 		"title": "FOCUS",
 		"tags": "",
-		"body": "I CAN FOCUS ON THIS BAR << if( isFocused == false) { giveTime(30); isFocused = true; } >>\n\n-> BAR|FOCUS|TIME << isFocused >>[[BAR2]]",
+		"body": "I CAN FOCUS ON THIS BAR (+30 STRENGTH!) << if( isFocused == false) { giveTime(30); isFocused = true; } >>\n\n-> BAR|FOCUS|TIME << isFocused >>[[BAR2]]",
 		"position": {
 			"x": 21,
 			"y": -893
