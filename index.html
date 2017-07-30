@@ -15,6 +15,17 @@ body, html {
 <body><script type="text/javascript">
 
 window.onload = function() {
+
+  // Because we need format strings
+  String.prototype.format = function() {
+      var formatted = this;
+      for (var i = 0; i < arguments.length; i++) {
+          var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+          formatted = formatted.replace(regexp, arguments[i]);
+      }
+      return formatted;
+  };
+
   // This year theme is running out of power
   var game = new Phaser.Game(768,576, Phaser.AUTO, 'LD39: Herkuel the Strong Arm',
     { init: init, preload: preload, create: create, update: update, render:render }, false, false);
@@ -23,6 +34,7 @@ window.onload = function() {
   Objects.action = function(properties) {
     this.regex = properties["match"];
     this.texts = properties["texts"];
+    this.title = properties["title"];
     this.currentTextIndex = 0;
   };
 
@@ -98,20 +110,22 @@ window.onload = function() {
           function(n){ return (n != undefined) && (n != "") });
     if (actionRegex && texts.length != 0) {
         actions.push(new Objects.action({
-          match: new RegExp(actionRegex, 'i'),
-          texts: texts
+          match: actionRegex,
+          texts: texts,
+          title: action.title,
         }));
     }
     for(let i = 0; i < linkTexts.length; i++) {
-      const match = linkTexts[i].match(/(.*?)\s*\[\[(.*)\]\]\s*$/);
-      const regex = match[1];
-      const nextCard = match[2].toUpperCase();
-      const conditional = regex.match(/<<\s*(.*)\s*>>/);
+      const match = linkTexts[i].match(/(.*?)\s*(?:<<\s*(.*?)\s*>>)?\s*\[\[(.*)\]\]\s*$/);
+      const regex = new RegExp(match[1], 'i');
+      const nextCard = match[3].toUpperCase();
+      // If we have a conditionals in our regex string.
+      const conditional = match[2];
       if( conditional ) {
 
       } else {
-         // Prevent recursion loops.
-         if( actions.find(function(e) { return e.match(nextCard); }) == undefined) {
+         // Prevent recursion loops, see if we've already added
+         if( actions.find(function(e) { return e.title == nextCard; }) == undefined) {
           actions.concat(Objects.createActions(obj, obj[nextCard], actions, regex));
          }
       }
@@ -120,17 +134,18 @@ window.onload = function() {
   };
 
 
-
   var input;
   var text;
   var eventText;
-  var time = 9;
+  var timeText;
+  var timeLeft = 9;
 
   var actions = [];
   var defaultAction;
   var currentAction;
 
   var debugLogging = false;
+  var DATA = Objects.getYarnDATA();
 
   function init() {
     game.renderer.renderSession.roundPixels = true;
@@ -156,13 +171,13 @@ window.onload = function() {
     game.time.desiredFps = 60;
     let bg = game.add.sprite(0, 0, 'bg');
 
-    let style = { font: "18px Arial",
+    const style = { font: "18px Arial",
         fill: "#FEFEFE",
         boundsAlignH: "left",
         boundsAlignV: "top",
         wordWrap: true, wordWrapWidth: 650
     };
-    let styleGrey = { font: "18px Arial", fill: "#8E8E8E" };
+    const styleGrey = { font: "18px Arial", fill: "#8E8E8E" };
 
     input = game.add.inputField(0, 525, {
       font: '18px Arial',
@@ -184,18 +199,21 @@ window.onload = function() {
     text = game.add.text(20, 475, "I should do something", styleGrey);
     text.anchor.x = 0;
     text.anchor.y = 0.8;
-    eventText = game.add.text(0, 0, "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.", style);
+    eventText = game.add.text(20, 475, "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.", style);
     eventText.addColor('#fee761', eventText.text.indexOf("STRONGEST"));
     eventText.addColor('#FEFEFE', eventText.text.indexOf("compeitition"));
-    eventText.anchor.x = 0;
-    eventText.anchor.y = 0.9;
-    eventText.setTextBounds(20, 525, 768, 56);
+    eventText.setTextBounds(0, 0, 768, 56);
+
+    let timerStyle = style;
+    timerStyle.boundsAlignH = "right";
+    timeText = game.add.text(0, 0, "Time: {0}".format(timeLeft), timerStyle);
+    timeText.setTextBounds(0, 0, 768, 56);
 
     // Leave cursor on in input field when you hit enter.
     input.focusOutOnEnter = true;
     //start with focus on the element
     input.startFocus();
-    actions = Objects.parseData(Objects.getYarnDATA());
+    actions = Objects.parseData(DATA);
     defaultAction = actions.splice(actions.findIndex(function(e) { return e.match("<<DEFAULT") }), 1)[0];
     currentAction = defaultAction;
   }
@@ -211,6 +229,7 @@ window.onload = function() {
   }
 
   function update () {
+    const dt = game.time.elapsed/1000;
     if (input.focus) {
       // Wait till the user is done typing
     }
@@ -225,13 +244,13 @@ window.onload = function() {
         currentAction = foundAction;
         // Do the aciton
         text.text = getText();
-        currentAction.update(1);
+        currentAction.update(dt);
         currentAction.printTextObj(eventText);
       } else {
         currentAction = defaultAction;
         // Do the aciton
         text.text = getText();
-        currentAction.update(1);
+        currentAction.update(dt);
         currentAction.printTextObj(eventText);
       }
 
@@ -240,7 +259,9 @@ window.onload = function() {
       input.startFocus();
     }
 
-    this.input.update();
+    input.update();
+    timeLeft -= dt;
+    timeText.text = "Time: {0}".format(Math.round(timeLeft));
   }
 
   function render () {
