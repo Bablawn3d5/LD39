@@ -35,14 +35,21 @@ window.onload = function() {
     this.regex = properties["match"];
     this.texts = properties["texts"];
     this.title = properties["title"];
+    this.cond = properties["conditional"];
+    this.parent = properties["parent"];
     this.currentTextIndex = 0;
+    this.count = 0;
   };
 
   Objects.action.prototype.match = function(m) {
+    if(this.cond != undefined) {
+       return undefined;
+    }
     return m.match(this.regex);
   };
 
   Objects.action.prototype.printTextObj = function(textObj) {
+    this.count++;
     let text = this.texts[this.currentTextIndex++];
     this.currentTextIndex = this.currentTextIndex % this.texts.length;
     // Check if we need color replace
@@ -50,6 +57,8 @@ window.onload = function() {
       0: "#FEFEFE", //Plain
       1: "#fee761" //Yellow
     }
+
+    // Colors
     let replace = text.match(/(\$c\d+)/ig);
     textObj.colors = [];
     textObj.addColor("#FEFEFE", 0);
@@ -61,6 +70,13 @@ window.onload = function() {
         textObj.addColor(color, indx);
       }
     };
+    // Conditionals
+    let cond = text.match(/(\s*<<\s*(.+)\s*>>\s*)$/i);
+    if (cond) {
+      eval(cond[2]);
+      text = text.replace(cond[1], "");
+    }
+
     textObj.text = text;
   };
 
@@ -92,10 +108,11 @@ window.onload = function() {
     return obj;
   }
 
-  Objects.parseData = function(obj, id) {
+  Objects.parseData = function(obj, id, regex, exsting) {
+    exsting = exsting || []
     id = id || "START";
     // Use hardcoded START key as the indicator of where to begin parsing.
-    let actions = Objects.createActions(obj, obj[id], []);
+    let actions = Objects.createActions(obj, obj[id.toUpperCase()], exsting, regex);
     // Reverse actions so later actions get regex priority over older actions.
     return actions.reverse();
   };
@@ -107,11 +124,12 @@ window.onload = function() {
           function(n){ return (n != undefined) && (n != "") });
     const linkTexts = action.body.substring(actionLinkIndex).split(/\n?->\s?/).filter(
           function(n){ return (n != undefined) && (n != "") });
+    const actionName = action.title.toUpperCase();
     if (actionRegex && texts.length != 0) {
         actions.push(new Objects.action({
           match: actionRegex,
           texts: texts,
-          title: action.title,
+          title: actionName,
         }));
     }
     for(let i = 0; i < linkTexts.length; i++) {
@@ -121,7 +139,13 @@ window.onload = function() {
       // If we have a conditionals in our regex string.
       const conditional = match[2];
       if( conditional ) {
-
+        // Add action conditional stub, but don't add its children.
+        actions.push(new Objects.action({
+          title: nextCard,
+          conditional: conditional,
+          match: actionRegex,
+          parent: actions.find(function(e) { return e.title == actionName; }),
+        }));
       } else {
          // Prevent recursion loops, see if we've already added
          if( actions.find(function(e) { return e.title == nextCard; }) == undefined) {
@@ -137,14 +161,32 @@ window.onload = function() {
   var text;
   var eventText;
   var timeText;
-  var timeLeft = 30.5;
+  var timeLeft = 12.5;
 
   var actions = [];
   var defaultAction;
   var currentAction;
 
+
+  var isTrapped = false;
+  var oneKnee = false;
+  var isDistracted = false;
+  var liftCount = 0;
+
   var debugLogging = false;
   var DATA = Objects.getYarnDATA();
+
+  function giveTime(t) {
+    timeLeft += t;
+  }
+
+  function removeCard(name) {
+    const index = actions.findIndex(function(e) { return e.title == name });
+    if ( index == -1 ) {
+      return undefined;
+    }
+    return actions.splice(index,1);
+  }
 
   function init() {
     game.renderer.renderSession.roundPixels = true;
@@ -213,7 +255,7 @@ window.onload = function() {
     //start with focus on the element
     input.startFocus();
     actions = Objects.parseData(DATA);
-    defaultAction = actions.splice(actions.findIndex(function(e) { return e.match("<<DEFAULT") }), 1)[0];
+    defaultAction = removeCard("DEFAULT");
     currentAction = defaultAction;
   }
 
@@ -257,7 +299,18 @@ window.onload = function() {
       input.setText(">");
       input.startFocus();
     }
-
+    const conditionals = actions.filter(function(e){
+      return e.cond != undefined;
+    });
+    for(let i=0; i < conditionals.length; i++) {
+      let condAction = conditionals[i];
+      if(eval(condAction.cond) == true) {
+        console.log("MET CONDITION FOR: " + condAction.title);
+        // Add new action card(s) and
+        removeCard(condAction.title);
+        actions = Objects.parseData(DATA, condAction.title, condAction.regex, actions.reverse());
+      }
+    }
     input.update();
     timeLeft -= dt;
     timeText.text = "Time: {0}".format(Math.round(timeLeft));
