@@ -48,7 +48,7 @@ window.onload = function() {
     return m.match(this.regex);
   };
 
-  Objects.action.prototype.printTextObj = function(textObj) {
+  Objects.action.prototype.printTextObj = function(textObj, regexMatch) {
     this.count++;
     let text = this.texts[this.currentTextIndex++];
     this.currentTextIndex = this.currentTextIndex % this.texts.length;
@@ -70,6 +70,13 @@ window.onload = function() {
         textObj.addColor(color, indx);
       }
     };
+    // SUBSITUTIONS
+    let sub = text.match(/\$sub/i);
+    if (sub) {
+      text = text.replace(sub[0], regexMatch[1]);
+    }
+
+
     // Conditionals
     let cond = text.match(/(\s*<<\s*(.+)\s*>>\s*)$/i);
     if (cond) {
@@ -161,7 +168,7 @@ window.onload = function() {
   var text;
   var eventText;
   var timeText;
-  var timeLeft = 12.5;
+  var timeLeft = 30.5;
 
   var actions = [];
   var defaultAction;
@@ -255,7 +262,7 @@ window.onload = function() {
     //start with focus on the element
     input.startFocus();
     actions = Objects.parseData(DATA);
-    defaultAction = removeCard("DEFAULT");
+    defaultAction = removeCard("DEFAULT")[0];
     currentAction = defaultAction;
   }
 
@@ -286,7 +293,7 @@ window.onload = function() {
         // Do the aciton
         text.text = getText();
         currentAction.update(dt);
-        currentAction.printTextObj(eventText);
+        currentAction.printTextObj(eventText, foundAction.match(playerText));
       } else {
         currentAction = defaultAction;
         // Do the aciton
