@@ -251,7 +251,7 @@ window.onload = function() {
     // This needs to be set to "anonymous" for it to work under CDNs
     game.load.crossOrigin = "Anonymous"
     // Assets here.
-    game.load.image('bg', 'assets/test.png');
+    game.load.image('bg', 'assets/main.png');
     game.load.image('title', 'assets/title2.png');
     game.load.image('invis', 'assets/invis.png');
     game.load.spritesheet('icons', 'assets/overlay.png', 76, 72);
@@ -359,7 +359,7 @@ window.onload = function() {
 
         button.width = 80;
         button.height = 30;
-        acheivos[7] = { s: button, got: false, text: a_text };
+        acheivos[8] = { s: button, got: false, text: a_text };
     }
 
 
@@ -424,7 +424,8 @@ window.onload = function() {
     currentAction = defaultAction;
     text.text = "I should do something";
     eventText.text = "I need your HELP. What should I do? I don't have much TIME";
-    eventText.addColor('#fee761', eventText.text.indexOf("help"));
+    eventText.colors = [];
+    eventText.addColor('#fee761', eventText.text.indexOf("HELP"));
     eventText.addColor('#FEFEFE', eventText.text.indexOf(". What"));
     eventText.addColor('#fee761', eventText.text.indexOf("TIME"));
     // Hide achiveo covers
