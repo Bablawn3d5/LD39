@@ -11,15 +11,105 @@ body, html {
 <title>LD39: Herkuel the Strong Arm</title>
 <script src="js/phaser.min.js"></script>
 <script src="js/phaser-input.js"></script>
+<script src="assets/cards.json"></script>
 </head>
 <body><script type="text/javascript">
+
 window.onload = function() {
   // This year theme is running out of power
   var game = new Phaser.Game(768,576, Phaser.AUTO, 'LD39: Herkuel the Strong Arm',
     { init: init, preload: preload, create: create, update: update, render:render }, false, false);
 
+  var Objects = {};
+  Objects.action = function(properties) {
+    this.regex = properties["match"];
+    this.texts = properties["texts"];
+    this.currentTextIndex = 0;
+  };
+
+  Objects.action.prototype.match = function(m) {
+    return m.search(this.regex) != -1;
+  };
+
+  Objects.action.prototype.printTextObj = function(textObj) {
+    this.currentTextIndex++;
+    this.currentTextIndex = this.currentTextIndex % this.texts.length;
+    let text = this.texts[this.currentTextIndex];
+    // Check if we need color replace
+    const color_lookup = {
+      0: "#FEFEFE", //Plain
+      1: "#fee761" //Yellow
+    }
+    let replace = text.match(/(\$c\d+)/ig);
+    textObj.colors = [];
+    textObj.addColor("#FEFEFE", 1);
+    if(replace) {
+      for ( let i = 0; i < replace.length; i++) {
+        const indx = text.indexOf(replace[i]);
+        const color = color_lookup[/\d+/.exec(replace[i])];
+        text = text.replace(replace[i], "");
+        textObj.addColor(color, indx);
+      }
+    };
+    textObj.text = text;
+  };
+
+  Objects.action.prototype.update = function(dt) {
+
+  };
+
+  Objects.parseData = function(YarnData) {
+    // Re-map raw JSON to some useful obj
+    let obj = {}
+    for(let i = 0; i < YarnData.length; i++) {
+      obj[YarnData[i].title] = YarnData[i];
+    };
+
+    // Use hardcoded START key as the indicator of where to begin parsing.
+    let actions = Objects.createActions(obj, obj["START"], []);
+    return actions;
+  };
+
+  // Recursively create actions
+  Objects.createActions = function (obj, action, actions, actionRegex=undefined) {
+    const actionLinkIndex = (action.body.indexOf('->') != -1) ? action.body.indexOf('->') : action.body.length;
+    const texts = action.body.substring(0,actionLinkIndex).split(/\n/).filter(
+          function(n){ return (n != undefined) && (n != "") });
+    const linkTexts = action.body.substring(actionLinkIndex).split(/\n?->\s?/).filter(
+          function(n){ return (n != undefined) && (n != "") });
+    if (actionRegex && texts.length != 0) {
+        actions.push(new Objects.action({
+          match: new RegExp(actionRegex),
+          texts: texts
+        }));
+    }
+    for(let i = 0; i < linkTexts.length; i++) {
+      const match = linkTexts[i].match(/(.*?)\s*\[\[(.*)\]\]\s*$/);
+      const regex = match[1];
+      const nextCard = match[2];
+      const conditional = regex.match(/<<\s*(.*)\s*>>/);
+      if( conditional ) {
+
+      } else {
+         // Prevent recursion loops.
+         if( actions.find(function(e) { return e.match(nextCard); }) == undefined) {
+          actions.concat(Objects.createActions(obj, obj[nextCard], actions, regex));
+         }
+      }
+    }
+    return actions.reverse();
+  };
+
+
+
   var input;
   var text;
+  var eventText;
+  var time = 9;
+
+  var actions = [];
+  var defaultAction;
+  var currentAction;
 
   var debugLogging = false;
 
@@ -37,7 +127,7 @@ window.onload = function() {
     // This needs to be set to "anonymous" for it to work under CDNs
     game.load.crossOrigin = "Anonymous"
     // Assets here.
-    // game.load.image('bg', 'assets/LoneGalaxy.png');
+    game.load.image('bg', 'assets/test.png');
     // game.load.spritesheet('player-01', 'assets/ShooterThing.png', 137, 148);
   }
 
@@ -45,8 +135,15 @@ window.onload = function() {
     game.stage.backgroundColor = '#000010';
     game.time.advancedTiming = true;
     game.time.desiredFps = 60;
+    let bg = game.add.sprite(0, 0, 'bg');
 
-    var style = { font: "18px Arial", fill: "#FEFEFE" };
+    let style = { font: "18px Arial",
+        fill: "#FEFEFE",
+        boundsAlignH: "left",
+        boundsAlignV: "top",
+        wordWrap: true, wordWrapWidth: 650
+    };
+    let styleGrey = { font: "18px Arial", fill: "#8E8E8E" };
 
     input = game.add.inputField(0, 525, {
       font: '18px Arial',
@@ -58,21 +155,40 @@ window.onload = function() {
       borderRadius : 2,
       padding : 2,
       forceCase : "upper",
-      width : 768
+      width : 768,
+      zoom: false
     });
     input.anchor.x = 0;
     input.anchor.y = 1;
     input.setText(">");
 
-    text = game.add.text(20, 500, "text text text", style);
+    text = game.add.text(20, 475, "I should do something", styleGrey);
     text.anchor.x = 0;
-    text.anchor.y = 0.9;
+    text.anchor.y = 0.8;
+    eventText = game.add.text(0, 0, "", style);
+    eventText.anchor.x = 0;
+    eventText.anchor.y = 0.9;
+    eventText.setTextBounds(20, 525, 768, 56);
 
     // Leave cursor on in input field when you hit enter.
     input.focusOutOnEnter = true;
     //start with focus on the element
     input.startFocus();
+    defaultAction = new Objects.action({
+      match: /.*/,
+      texts: [
+      "I don't know what you mean",
+      "Uhh What?",
+      "HUH?",
+      "I don't have that kind of thing to do that",
+      "Does it look like I can do that?",
+      ]
+    });
+
+    actions = Objects.parseData(DATA);
+    currentAction = defaultAction;
   }
+
   function debugLog(log){
     if(debugLogging) {
       console.log(log);
@@ -85,10 +201,30 @@ window.onload = function() {
 
   function update () {
     if (input.focus) {
-      // Wait till the user is done
+      // Wait till the user is done typing
     }
     else {
-      text.text = getText();
+      let playerText = getText();
+      const foundAction = actions.find(function(element) {
+        return element.match(playerText);
+      })
+      if ( playerText == "" ) {
+        // Do nothing
+      } else if (foundAction) {
+        currentAction = foundAction;
+        // Do the aciton
+        text.text = getText();
+        currentAction.update(1);
+        currentAction.printTextObj(eventText);
+      } else {
+        currentAction = defaultAction;
+        // Do the aciton
+        text.text = getText();
+        currentAction.update(1);
+        currentAction.printTextObj(eventText);
+      }
+
+      // Reset focus so the user can type
       input.setText(">");
       input.startFocus();
     }
@@ -98,8 +234,6 @@ window.onload = function() {
 
   function render () {
     game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-    game.debug.text(input || '--', 200, 16, "#00ff00");
-
   }
 };
 </script></body>

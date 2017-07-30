@@ -1,0 +1,232 @@
+var DATA = [
+	{
+		"title": "START",
+		"tags": "",
+		"body": "-> LIFT [[LIFT]]\n-> GO|STILL [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP [[SHIT]]\n-> DROP [[ATTEMPT DROP]]\n-> DEFAULT2 <<timerLessThan(10)>> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> DONOTHING [[DID NOTHING]]",
+		"position": {
+			"x": 132,
+			"y": 375
+		},
+		"colorID": 0
+	},
+	{
+		"title": "LIFT",
+		"tags": "",
+		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> LIFT << lifted(2) >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK)(?:ABOUT)?(\\w+)\\b [[THINK]]\n-> MEDIDATE [[MEDITATE]]\n-> GROW [[GROW]]",
+		"position": {
+			"x": 449,
+			"y": 158
+		},
+		"colorID": 6
+	},
+	{
+		"title": "DEFAULT",
+		"tags": "",
+		"body": "Uhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 do that\nI just gotta keep $c1LIFTING$c0 until I feel like I can do this ONE HANDED!",
+		"position": {
+			"x": -273,
+			"y": 433
+		},
+		"colorID": 4
+	},
+	{
+		"title": "LIFT GOOD",
+		"tags": "",
+		"body": "I think I can keep $c1LIFTc0 this up with your advice!!\n\n-> CAN DO IT|YES|KEEP AT IT|LIFT [[LIFT WILLPOWER]]",
+		"position": {
+			"x": 578,
+			"y": -124
+		},
+		"colorID": 6
+	},
+	{
+		"title": "USE",
+		"tags": "",
+		"body": "My hands are full $LIFTING$ this heavy weight to $c1USE$c0 anything.",
+		"position": {
+			"x": 213,
+			"y": 680
+		},
+		"colorID": 5
+	},
+	{
+		"title": "GO",
+		"tags": "",
+		"body": "I ain't movin from this spot if that's what you're thinking.\nUhh $c1GO$c0? What you want me to $c1GO$c0 somewhere $c1CARRYING$c0 this heavy thing? NO WAY!!",
+		"position": {
+			"x": -30,
+			"y": 682
+		},
+		"colorID": 5
+	},
+	{
+		"title": "LIFT WILLPOWER",
+		"tags": "",
+		"body": "I GOT TWO HANDS ON THE BAR. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\nJUST KEEP $c1LIFTING$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT [[RAWPOWER]]\n-> DROP|LET GO [[DROP ARM]]",
+		"position": {
+			"x": 576,
+			"y": -615
+		},
+		"colorID": 6
+	},
+	{
+		"title": "THINK",
+		"tags": "",
+		"body": "Okay I'll think about $sub\n\n-> THINK<<DISTRACTED>>[[ZEN]]",
+		"position": {
+			"x": 907,
+			"y": 632
+		},
+		"colorID": 6
+	},
+	{
+		"title": "LOOK",
+		"tags": "",
+		"body": "I can see flashing lights in the background. I'm standing in the middle of the stadium. I'm currently $c1LIFTING$c0 this weight for the $c1STRONGEST ARM$c0 compeition.",
+		"position": {
+			"x": 453,
+			"y": 669
+		},
+		"colorID": 1
+	},
+	{
+		"title": "Default2",
+		"tags": "",
+		"body": "REALLY I'M TRYING TO CONCENTRATE HERE\nI DON'T KNOW, THIS THING IS HEAVY\nLISTEN I DONT KNOW WHAT YOU'RE TALKING ABOUT\nHNNNNGGGG?\nUUUUHHH??\n\n\n-> DROP|LET GO [[DROP]]",
+		"position": {
+			"x": 133,
+			"y": -413
+		},
+		"colorID": 4
+	},
+	{
+		"title": "SHIT",
+		"tags": "",
+		"body": "<< ENDING(SHIT) >>",
+		"position": {
+			"x": 450,
+			"y": 398
+		},
+		"colorID": 3
+	},
+	{
+		"title": "DROP",
+		"tags": "",
+		"body": "<< ENDING(OOPS) >>",
+		"position": {
+			"x": 389,
+			"y": -366
+		},
+		"colorID": 3
+	},
+	{
+		"title": "MEDITATE",
+		"tags": "",
+		"body": "Okay I'll meditate about $sub \n\n-> Medidate<<DISTRACTED>>[[ZEN]] \n",
+		"position": {
+			"x": 910,
+			"y": 405
+		},
+		"colorID": 6
+	},
+	{
+		"title": "RAWPOWER",
+		"tags": "",
+		"body": "RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWW\n<< ENDING(IHAVETHEPOWER) >>",
+		"position": {
+			"x": 580,
+			"y": -901
+		},
+		"colorID": 3
+	},
+	{
+		"title": "ZEN",
+		"tags": "",
+		"body": "Not a care in the world\n<< ENDING(ZEN) >>",
+		"position": {
+			"x": 1483,
+			"y": 635
+		},
+		"colorID": 3
+	},
+	{
+		"title": "ATTEMPT DROP",
+		"tags": "",
+		"body": "No way I'm not loosing this compeitition. I'm going to keep $c1LIFTING$c0 till I can't $c1LIFT$c0 anymore!",
+		"position": {
+			"x": -273,
+			"y": 681
+		},
+		"colorID": 5
+	},
+	{
+		"title": "FLYAWAY",
+		"tags": "",
+		"body": "<< ENDING(FLYAWAY) >>",
+		"position": {
+			"x": 1485,
+			"y": 411
+		},
+		"colorID": 3
+	},
+	{
+		"title": "GROW",
+		"tags": "",
+		"body": "Intresting? Grow a $sub ? Well I did say I can do anything. What am I growing again?\n\n-> GROW WINGS [[FLYAWAY]]\n-> GROW ARM|LEG|CHEST|HEAD [[MUTANT]]",
+		"position": {
+			"x": 912,
+			"y": 180
+		},
+		"colorID": 6
+	},
+	{
+		"title": "ONE ARM",
+		"tags": "",
+		"body": "<< ENDING(STRONGESTARM) >>",
+		"position": {
+			"x": 940,
+			"y": -892
+		},
+		"colorID": 3
+	},
+	{
+		"title": "DID NOTHING",
+		"tags": "",
+		"body": "<< ENDING(DIDNOTHING) >>",
+		"position": {
+			"x": -266,
+			"y": 190
+		},
+		"colorID": 3
+	},
+	{
+		"title": "DROP ARM",
+		"tags": "",
+		"body": "I DID IT, I LET GO OF ONE ARM, NOW I JUST GOTTA $c1HOLD$c0 THIS.\n\n-> .* [[ARRG]]\n-> HOLD [[ONE ARM]]",
+		"position": {
+			"x": 944,
+			"y": -615
+		},
+		"colorID": 6
+	},
+	{
+		"title": "ARRG",
+		"tags": "",
+		"body": "HRNNGNN I GOTTA $c1GRAB$c0 ON I CAN'T KEEP THIS UP!!!\n\n-> .* [[DROP]]\n-> GRAB [[LIFT WILLPOWER]]",
+		"position": {
+			"x": 947,
+			"y": -365
+		},
+		"colorID": 6
+	},
+	{
+		"title": "MUTANT",
+		"tags": "",
+		"body": "<<ENDING(EXTRALIMB)>>",
+		"position": {
+			"x": 1485,
+			"y": 192
+		},
+		"colorID": 3
+	}
+]
