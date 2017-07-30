@@ -67,7 +67,8 @@ window.onload = function() {
 
     // Use hardcoded START key as the indicator of where to begin parsing.
     let actions = Objects.createActions(obj, obj["START"], []);
-    return actions;
+    // Reverse actions so later actions get regex priority over older actions.
+    return actions.reverse();
   };
 
   // Recursively create actions
@@ -97,7 +98,7 @@ window.onload = function() {
          }
       }
     }
-    return actions.reverse();
+    return actions;
   };
 
 
@@ -165,7 +166,7 @@ window.onload = function() {
     text = game.add.text(20, 475, "I should do something", styleGrey);
     text.anchor.x = 0;
     text.anchor.y = 0.8;
-    eventText = game.add.text(0, 0, "", style);
+    eventText = game.add.text(0, 0, "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.", style);
     eventText.anchor.x = 0;
     eventText.anchor.y = 0.9;
     eventText.setTextBounds(20, 525, 768, 56);
