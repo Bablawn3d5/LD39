@@ -168,20 +168,41 @@ window.onload = function() {
   var text;
   var eventText;
   var timeText;
-  var timeLeft = 30.5;
 
   var actions = [];
   var defaultAction;
   var currentAction;
 
 
+  var timeLeft = 30.5;
   var isTrapped = false;
   var oneKnee = false;
   var isDistracted = false;
   var liftCount = 0;
+  var isFocused = false;
 
   var debugLogging = false;
   var DATA = Objects.getYarnDATA();
+
+  function ENDING (name) {
+    if(name == "SHIT") {
+
+    } else if ( name == "DIDNOTHING" ) {
+
+    } else if ( name == "ZEN" ) {
+
+    } else if ( name == "FLYAWAY" ) {
+
+    } else if ( name == "MUTANT" ) {
+
+    } else if ( name == "OOPS" ) {
+
+    } else if ( name == "IHAVETHEPOWER" ) {
+
+    } else if ( name == "STRONGESTARM" ) {
+
+    }
+  }
 
   function giveTime(t) {
     timeLeft += t;
@@ -242,14 +263,12 @@ window.onload = function() {
     });
     input.anchor.x = 0;
     input.anchor.y = 1;
-    input.setText(">");
+    input.focusOutOnEnter = true;
 
-    text = game.add.text(20, 475, "I should do something", styleGrey);
+    text = game.add.text(20, 475, "", styleGrey);
     text.anchor.x = 0;
     text.anchor.y = 0.8;
-    eventText = game.add.text(20, 475, "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.", style);
-    eventText.addColor('#fee761', eventText.text.indexOf("STRONGEST"));
-    eventText.addColor('#FEFEFE', eventText.text.indexOf("compeitition"));
+    eventText = game.add.text(20, 475, "", style);
     eventText.setTextBounds(0, 0, 768, 56);
 
     let timerStyle = style;
@@ -258,12 +277,25 @@ window.onload = function() {
     timeText.setTextBounds(0, 0, 768, 56);
 
     // Leave cursor on in input field when you hit enter.
-    input.focusOutOnEnter = true;
+    restart();
+  }
+
+  function restart() {
     //start with focus on the element
-    input.startFocus();
     actions = Objects.parseData(DATA);
+    input.startFocus();
+    input.setText(">");
+    isTrapped = false;
+    oneKnee = false;
+    isDistracted = false;
+    isFocused = false;
+    timeLeft = 30.5;
     defaultAction = removeCard("DEFAULT")[0];
     currentAction = defaultAction;
+    text.text = "I should do something";
+    eventText.text = "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.";
+    eventText.addColor('#fee761', eventText.text.indexOf("STRONGEST"));
+    eventText.addColor('#FEFEFE', eventText.text.indexOf("compeitition"));
   }
 
   function debugLog(log){
@@ -282,6 +314,7 @@ window.onload = function() {
       // Wait till the user is done typing
     }
     else {
+      // In the game
       let playerText = getText();
       const foundAction = actions.find(function(element) {
         return element.match(playerText);
