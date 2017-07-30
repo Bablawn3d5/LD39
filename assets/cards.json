@@ -22,7 +22,7 @@
 	{
 		"title": "DEFAULT",
 		"tags": "",
-		"body": "Uhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 about that stuff\nI just gotta keep $c1LIFTING$c0 until I feel like I can do this $c1ONE HANDED$c0!",
+		"body": "I just gotta keep $c1LIFTING$c0 until I feel like I can do this $c1ONE HANDED$c0!.\nUhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 about that stuff\nI ain't $c1JOKEING$c0 around.",
 		"position": {
 			"x": -282,
 			"y": -28
@@ -52,7 +52,7 @@
 	{
 		"title": "GO",
 		"tags": "",
-		"body": "I ain't movin from this spot if that's what you're thinking.\nUhh $c1GO$c0? What you want me to $c1GO$c0 somewhere $c1CARRYING$c0 this heavy thing? NO WAY!!",
+		"body": "Uhh $c1GO$c0? What you want me to $c1GO$c0 somewhere $c1CARRYING$c0 this heavy thing? NO WAY!!\nI ain't movin from this spot if that's what you're thinking. This ins't a $c1JOKE$c0.",
 		"position": {
 			"x": -30,
 			"y": 682
@@ -84,7 +84,7 @@
 		"tags": "",
 		"body": "I can see flashing lights in the background. I'm standing in the middle of the stadium. I'm currently $c1LIFTING$c0 this weight for the $c1STRONGEST ARM$c0 compeition.",
 		"position": {
-			"x": -565,
+			"x": -555,
 			"y": 206
 		},
 		"colorID": 1
@@ -244,7 +244,7 @@
 		"tags": "",
 		"body": "$c1JOKE$c0? Who lost last year's $c1STRONGEST ARM$c0 compeition? A spider!\n$c1JOKE$c0? Sure! What do you call a $c1ONE ARMED$c0 bandit? A slot machine!\n$c1JOKE$c0? HAH! What has eight legs and no arms? A spider!\n$c1JOKE$c0? What can bearly $c1LIFT$c0 weights using thier arms? Weaklings!\n",
 		"position": {
-			"x": -572,
+			"x": -558,
 			"y": -19
 		},
 		"colorID": 5
@@ -272,7 +272,7 @@
 	{
 		"title": "HELP",
 		"tags": "",
-		"body": "Uhh I called YOU here to $c1HELP$c0 motiviate me to keep this $c1BAR$c0 up! Why are you asking me for $c1HELP$c0?",
+		"body": "Uhh I called YOU here to $c1HELP$c0 motiviate me to keep this $c1BAR$c0 up! Just tell me what to do and I'll do it!",
 		"position": {
 			"x": -275,
 			"y": 928
@@ -282,7 +282,7 @@
 	{
 		"title": "BAR",
 		"tags": "",
-		"body": "This bar was forged in the great fire. Only during the $c1STRONGEST ARM$c0 compeitition can one ever attempt to $c1HOLD$c0 it in $c1ONE ARM$c0.",
+		"body": "This bar was forged in the great fire. Only during the $c1STRONGEST ARM$c0 competition can one ever attempt to $c1HOLD$c0 it in $c1ONE ARM$c0.",
 		"position": {
 			"x": -32,
 			"y": 931

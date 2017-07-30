@@ -196,7 +196,8 @@ window.onload = function() {
     if(name == "SHIT") {
       acheivos[1].got = true;
     } else if ( name == "DIDNOTHING" ) {
-      textObj.text = "Oops, I couldn't hold that bar up any longer. (BAD END. No unlocks for u)";
+      eventText.colors = [];
+      eventText.text = "Oops, I couldn't hold that bar up any longer. (BAD END. No unlocks for u)";
     } else if ( name == "ZEN" ) {
       acheivos[2].got = true;
 
@@ -429,7 +430,7 @@ window.onload = function() {
     oneKnee = false;
     isDistracted = false;
     isFocused = false;
-    timeLeft = 45.5;
+    timeLeft = 2.5;
     defaultAction = removeCard("DEFAULT")[0];
     currentAction = defaultAction;
     text.text = "I should do something";
