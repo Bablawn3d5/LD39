@@ -461,7 +461,7 @@ window.onload = function() {
       // Wait till the user is done typing
     } else if (!inGame) {
       let playerText = getText();
-      if ( playerText == "START" ) {
+      if ( playerText.match(/START/i) ) {
         restart();
       }
 
