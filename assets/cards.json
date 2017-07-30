@@ -2,7 +2,7 @@
 	{
 		"title": "START",
 		"tags": "",
-		"body": "-> LIFT [[LIFT]]\n-> STILL|GO|NORTH|SOUTH|EAST|WEST [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE\\s*(?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> ONE KNEE [[ONE KNEE]]\n-> DEFAULT << timeLeft < 10 && isTrapped == false >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> BAR [[BAR]]\n-> HELP [[HELP]]\n-> .* << timeLeft < 0 >>[[DID NOTHING]]",
+		"body": "-> LIFT [[LIFT]]\n-> STILL|GO|NORTH|SOUTH|EAST|WEST [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE\\s*(?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> ONE KNEE [[ONE KNEE]]\n-> DEFAULT << timeLeft < 10 && isTrapped == false >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM|COMPETITION [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> BAR|WEIGHT [[BAR]]\n-> HELP [[HELP]]\n-> .* << timeLeft < 0 >>[[DID NOTHING]]",
 		"position": {
 			"x": 132,
 			"y": 375
@@ -12,7 +12,7 @@
 	{
 		"title": "LIFT",
 		"tags": "",
-		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI think I can keep $c1LIFT$c0 this up with your advice!!\n\n-> LIFT << condAction.parent.count > 2 >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK)\\s*(?:ABOUT\\s*)?(\\w+)\\b [[THINK]]\n-> MEDIDATE\\s*(?:ABOUT\\s*)?(\\w+)\\b [[MEDITATE]]\n-> GROW(\\sa?\\s*\\w+)? << condAction.parent.count > 2 >> [[GROW]]",
+		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI think I can keep $c1LIFT$c0 this up with your advice!!\n\n-> LIFT << condAction.parent.count > 2 >> [[LIFT GOOD]]\n-> THINK|CONTEMPLATE|MEDIDATE [[THINK2]]\n-> (?:DISTRACT|THINK|CONTEMPLATE)\\s*(?:ABOUT\\s*)?(\\w+)\\b [[THINK]]\n-> MEDIDATE\\s*(?:ABOUT\\s*)?(\\w+)\\b [[MEDITATE]]\n-> GROW(\\sa?\\s*\\w+)? << condAction.parent.count > 2 >> [[GROW]]",
 		"position": {
 			"x": 440,
 			"y": 213
@@ -62,17 +62,17 @@
 	{
 		"title": "LIFT WILLPOWER",
 		"tags": "",
-		"body": "I GOT TWO HANDS ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR [[FOCUS]]\n-> FOCUS [[FOCUS]]\n-> TIME [[FOCUS]]\n-> HELP [[HELP2]]\n",
+		"body": "I GOT $c1TWO HANDS$c0 ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> (TWO)?\\s*(?:HAND|ARM|HANDED|ARMED) [[TWO ARM]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR [[FOCUS]]\n-> FOCUS [[FOCUS]]\n-> TIME [[FOCUS]]\n-> HELP [[HELP2]]\n",
 		"position": {
-			"x": 663,
-			"y": -618
+			"x": 589,
+			"y": -624
 		},
 		"colorID": 6
 	},
 	{
 		"title": "THINK",
 		"tags": "",
-		"body": "Okay I'll think about $sub\n\n-> THINK<< isDistracted >>[[ZEN]]",
+		"body": "Okay I'll think about $sub << isDistracted = true >>\n\n-> THINK<< isDistracted >>[[ZEN]]",
 		"position": {
 			"x": 907,
 			"y": 632
@@ -102,7 +102,7 @@
 	{
 		"title": "SHIT",
 		"tags": "",
-		"body": "<< ENDING(SHIT) >>",
+		"body": "How embarassing? I just shit myself. << ENDING('SHIT') >>",
 		"position": {
 			"x": 442,
 			"y": 449
@@ -112,17 +112,17 @@
 	{
 		"title": "DROP",
 		"tags": "",
-		"body": "<< ENDING(OOPS) >>",
+		"body": "WHOOPS! << ENDING('OOPS') >>",
 		"position": {
-			"x": 391,
-			"y": -339
+			"x": 399,
+			"y": -337
 		},
 		"colorID": 3
 	},
 	{
 		"title": "MEDITATE",
 		"tags": "",
-		"body": "Okay I'll meditate about $sub \n\n-> Medidate<< isDistracted >>[[ZEN]] \n",
+		"body": "Okay I'll meditate about $sub << isDistracted = true >>\n\n-> Medidate<< isDistracted >>[[ZEN]] \n",
 		"position": {
 			"x": 910,
 			"y": 405
@@ -132,7 +132,7 @@
 	{
 		"title": "RAWPOWER",
 		"tags": "",
-		"body": "RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWW\n<< ENDING(IHAVETHEPOWER) >>",
+		"body": "RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWW << ENDING('IHAVETHEPOWER') >>",
 		"position": {
 			"x": 941,
 			"y": -846
@@ -142,10 +142,10 @@
 	{
 		"title": "ZEN",
 		"tags": "",
-		"body": "Not a care in the world << ENDING(ZEN) >>",
+		"body": "Not a care in the world << ENDING('ZEN') >>\n\n-> .* [[NOT DESTRACTED]]",
 		"position": {
-			"x": 1483,
-			"y": 635
+			"x": 1480,
+			"y": 660
 		},
 		"colorID": 3
 	},
@@ -162,7 +162,7 @@
 	{
 		"title": "FLYAWAY",
 		"tags": "",
-		"body": "<< ENDING(FLYAWAY) >>",
+		"body": "Freedom at last. << ENDING('FLYAWAY') >>",
 		"position": {
 			"x": 1485,
 			"y": 411
@@ -182,17 +182,17 @@
 	{
 		"title": "ONE ARM",
 		"tags": "",
-		"body": "<< ENDING(STRONGESTARM) >>",
+		"body": "I AM THE $c1STRONGEST ARM$c0!!!! << ENDING('STRONGESTARM') >>\n\n-> .*[[ARRG]]",
 		"position": {
-			"x": 1199,
-			"y": -841
+			"x": 1181,
+			"y": -854
 		},
 		"colorID": 3
 	},
 	{
 		"title": "DID NOTHING",
 		"tags": "",
-		"body": "<< ENDING(DIDNOTHING) >>",
+		"body": "Welp I couldn't hold on any longer. << ENDING('DIDNOTHING') >>",
 		"position": {
 			"x": 440,
 			"y": 677
@@ -202,27 +202,27 @@
 	{
 		"title": "DROP ARM",
 		"tags": "",
-		"body": "I DID IT, I LET GO OF ONE ARM. ON. THE. $c1BAR$c0. NOW I JUST GOTTA $c1HOLD$c0 THIS POSE!. << isTrapped = true >>\n\n-> .* << isTrapped == true >> [[ARRG]]\n-> HOLD|POSE << isTrapped == true >> [[ONE ARM]]",
+		"body": "I DID IT, I LET GO OF ONE ARM. ON. THE. $c1BAR$c0. NOW I JUST GOTTA $c1HOLD$c0 THIS POSE!. << isTrapped = true >>\n\n-> HOLD|POSE|STAY|STILL << isTrapped == true >> [[ONE ARM]]",
 		"position": {
-			"x": 944,
-			"y": -615
+			"x": 954,
+			"y": -606
 		},
 		"colorID": 6
 	},
 	{
 		"title": "ARRG",
 		"tags": "",
-		"body": "HRNNGNN I GOTTA $c1GRAB$c0 ON I CAN'T KEEP THIS UP!!! << isTrapped = true >>\n\n-> .* << isTrapped == true >>[[DROP]]\n-> GRAB [[GRABBED]]",
+		"body": "HRNNGNN I GOTTA $c1GRAB$c0 ON I CAN'T KEEP THIS UP!!! << isARGED = true; removeCard('ARRG');  removeCard('ONE ARM'); >>\n\n-> GRAB << isARGED == true >>[[GRABBED]]\n-> .* << isARGED == true >>[[DROP]]",
 		"position": {
-			"x": 941,
-			"y": -341
+			"x": 1184,
+			"y": -344
 		},
 		"colorID": 6
 	},
 	{
 		"title": "MUTANT",
 		"tags": "",
-		"body": "<<ENDING(EXTRALIMB)>>",
+		"body": "Who knew those extra limbs would come in handy? <<ENDING('EXTRALIMB')>>",
 		"position": {
 			"x": 1485,
 			"y": 192
@@ -242,7 +242,7 @@
 	{
 		"title": "STRONGEST ARM",
 		"tags": "",
-		"body": "The compeition is about who in the world has the $c1STRONGEST ARM$c0. I stand here to proove my worth, I need to do this somehow $c1ONE HANDED$c0, but I feel like I'm loosing power.",
+		"body": "I stand here to proove my worth in this compitition, I need to do this somehow $c1ONE HANDED$c0, but I feel like I'm loosing power.",
 		"position": {
 			"x": -557,
 			"y": 673
@@ -292,10 +292,10 @@
 	{
 		"title": "GRABBED",
 		"tags": "",
-		"body": "HOLY SHIT THAT WAS CLOSE. TWO HANDS. BACK ON THE $c1BAR$c0!! << isTrapped = false; removeCard('ARRG'); removeCard('DROP ARM'); >>\n\n\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) << isTrapped == false>>[[DROP ARM]]",
+		"body": "HOLY SHIT THAT WAS CLOSE. TWO HANDS. BACK ON THE $c1BAR$c0!! << isTrapped = false; isARGED = false; removeCard('ARRG'); removeCard('GRABBED'); removeCard('ONE ARM'); removeCard('DROP'); >>\n\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) <<isTrapped == false && isARGED == false>> [[DROP ARM]]",
 		"position": {
-			"x": 939,
-			"y": -72
+			"x": 1545,
+			"y": -586
 		},
 		"colorID": 5
 	},
@@ -355,6 +355,36 @@
 		"body": "I AIN\"T GOING ANYWHERE TILL I AM THE CHAMPIONNNN",
 		"position": {
 			"x": 289,
+			"y": -1121
+		},
+		"colorID": 5
+	},
+	{
+		"title": "THINK2",
+		"tags": "",
+		"body": "Think about something? About what?",
+		"position": {
+			"x": 678,
+			"y": 680
+		},
+		"colorID": 6
+	},
+	{
+		"title": "NOT DESTRACTED",
+		"tags": "",
+		"body": "Whoa what was that about?! << isDistracted = false; removeCard('NOT DESTRACTED'); removeCard('ZEN'); removeCard('ZEN2'); addCard('THINK'); addCard('MEDITATE'); >>\n",
+		"position": {
+			"x": 1157,
+			"y": 937
+		},
+		"colorID": 5
+	},
+	{
+		"title": "TWO ARM",
+		"tags": "",
+		"body": "I WAS SUPPOST? $c1ARM$c0 WHAT AM I DONG AGAIN? THIS IS SO HEAVY. I DON\"T KNOW.",
+		"position": {
+			"x": 552,
 			"y": -1121
 		},
 		"colorID": 5

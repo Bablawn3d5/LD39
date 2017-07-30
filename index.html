@@ -180,6 +180,7 @@ window.onload = function() {
   var isDistracted = false;
   var liftCount = 0;
   var isFocused = false;
+  var isARGED = false;
 
   var debugLogging = false;
   var DATA = Objects.getYarnDATA();
@@ -202,6 +203,10 @@ window.onload = function() {
     } else if ( name == "STRONGESTARM" ) {
 
     }
+  }
+
+  function addCard(title,regex) {
+    actions = Objects.parseData(DATA, title, regex, actions.reverse());
   }
 
   function giveTime(t) {
@@ -346,9 +351,9 @@ window.onload = function() {
       let condAction = conditionals[i];
       if(eval(condAction.cond) == true) {
         console.log("MET CONDITION FOR: " + condAction.title);
-        // Add new action card(s) and
+        // Remove conditional action and add real aciton
         removeCard(condAction.title);
-        actions = Objects.parseData(DATA, condAction.title, condAction.regex, actions.reverse());
+        addCard(condAction.title, condAction.regex)
       }
     }
     input.update();
