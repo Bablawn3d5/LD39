@@ -192,7 +192,7 @@
 	{
 		"title": "DROP ARM",
 		"tags": "",
-		"body": "I DID IT, I LET GO OF ONE ARM. ON. THE. $c1BAR$c0. NOW I JUST GOTTA $c1HOLD$c0 THIS POSE!. << isTrapped = true >>\n\n-> HOLD|POSE|STAY|STILL << isTrapped == true >>[[ONE ARM]]",
+		"body": "I DID IT, I LET GO OF ONE ARM. ON. THE. $c1BAR$c0. NOW I JUST GOTTA $c1KEEP ONE ARM UP$c0 THIS POSE!. << isTrapped = true >>\n\n-> HOLD|POSE|STAY|STILL << isTrapped == true >>[[ONE ARM]]",
 		"position": {
 			"x": 952,
 			"y": -606
