@@ -2,7 +2,7 @@
 	{
 		"title": "START",
 		"tags": "",
-		"body": "-> LIFT [[LIFT]]\n-> STILL|GO|NORTH|SOUTH|EAST|WEST [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE\\s*(?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> ONE KNEE [[ONE KNEE]]\n-> DEFAULT << timeLeft < 10 && isTrapped == false >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM|COMPETITION [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> BAR|WEIGHT [[BAR]]\n-> HELP [[HELP]]\n-> DIDNOTHING! << timeLeft < 0 >>[[DID NOTHING]]",
+		"body": "-> LIFT [[LIFT]]\n-> STILL|GO|NORTH|SOUTH|EAST|WEST [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE\\s*(?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> ONE KNEE [[ONE KNEE]]\n-> DEFAULT << timeLeft < 10 && isTrapped == false >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM|COMPETITION|WIN [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> BAR|WEIGHT [[BAR]]\n-> HELP [[HELP]]\n-> DIDNOTHING! << timeLeft < 0 >>[[DID NOTHING]]",
 		"position": {
 			"x": 132,
 			"y": 375
@@ -12,7 +12,7 @@
 	{
 		"title": "LIFT",
 		"tags": "",
-		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI think I can keep $c1LIFT$c0 this up with your advice!!\n\n-> LIFT << condAction.parent.count > 2 >> [[LIFT GOOD]]\n-> THINK|CONTEMPLATE|MEDIDATE [[THINK2]]\n-> (?:DISTRACT|THINK|CONTEMPLATE)\\s*(?:ABOUT\\s*)?(\\w+)\\b [[THINK]]\n-> MEDIDATE\\s*(?:ABOUT\\s*)?(\\w+)\\b [[MEDITATE]]\n-> GROW(\\sa?\\s*\\w+)? << condAction.parent.count > 2 >> [[GROW]]",
+		"body": "Yeah! If I keep $c1LIFT$c0 this thing I'll be able to $c1WIN$c0!!.\nI'm $c1LIFTING$c0 as hard as I can!!\nI think I can keep $c1LIFT$c0 this up with your advice!!\n\n-> LIFT << condAction.parent.count > 2 >> [[LIFT GOOD]]\n-> THINK|CONTEMPLATE|MEDIDATE [[THINK2]]\n-> (?:DISTRACT|THINK|CONTEMPLATE)\\s*(?:ABOUT\\s*)?(\\w+)\\b [[THINK]]\n-> MEDIDATE\\s*(?:ABOUT\\s*)?(\\w+)\\b [[MEDITATE]]\n-> GROW(\\sa?\\s*\\w+)? << condAction.parent.count > 2 >> [[GROW]]",
 		"position": {
 			"x": 438,
 			"y": 195
@@ -222,7 +222,7 @@
 	{
 		"title": "STRONGEST ARM",
 		"tags": "",
-		"body": "I stand here to proove my worth in this compitition, I need to do this somehow $c1ONE HANDED$c0, but I feel like I'm loosing power.",
+		"body": "I stand here to proove my worth, I need to do this somehow get the bar high enough, then carry it $c1ONE HANDED$c0, but I feel like I'm loosing power.",
 		"position": {
 			"x": -557,
 			"y": 673
