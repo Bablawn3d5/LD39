@@ -194,7 +194,7 @@ window.onload = function() {
     if(name == "SHIT") {
       acheivos[1].got = true;
     } else if ( name == "DIDNOTHING" ) {
-
+      textObj.text = "Oops, I couldn't hold that bar up any longer.";
     } else if ( name == "ZEN" ) {
       acheivos[2].got = true;
 
@@ -253,6 +253,7 @@ window.onload = function() {
     // Assets here.
     game.load.image('bg', 'assets/test.png');
     game.load.image('title', 'assets/title2.png');
+    game.load.image('invis', 'assets/invis.png');
     game.load.spritesheet('icons', 'assets/overlay.png', 76, 72);
   }
 
@@ -332,6 +333,46 @@ window.onload = function() {
         acheivos[6] = { s: icon, got: false, text: a_text };
     }
 
+    {
+        let button = game.add.button(40*4, 98*4, 'invis', function() {
+        // open in the same window (like clicking a link)
+        window.location.href = "https://phen.itch.io"}, this);
+        let a_text = game.add.text(26*4, 98*4,
+          "A game by http://phen.itch.io",
+          styleAcheivo);
+        a_text.addColor('#2fefFF', a_text.text.indexOf("http://"));
+
+        button.width = 120;
+        button.height = 30;
+        acheivos[7] = { s: button, got: false, text: a_text };
+    }
+
+
+    {
+        let button = game.add.button(140*4, 98*4, 'invis', function() {
+        // open in the same window (like clicking a link)
+        window.location.href = "https://Twitter.com/tehPHEN"}, this);
+        let a_text = game.add.text(126*4, 98*4,
+          "Twitter: @tehPHEN",
+          styleAcheivo);
+        a_text.addColor('#2fefFF', a_text.text.indexOf("@tehPHEN"));
+
+        button.width = 80;
+        button.height = 30;
+        acheivos[7] = { s: button, got: false, text: a_text };
+    }
+
+
+    // {
+    //     let button = game.add.button(26*4, 98*4, 'icons', function() {
+    //     // open in the same window (like clicking a link)
+    //     window.location.href = "https://phen.itch.io"}, this);
+    //     let a_text = game.add.text(26*4, 98*4,
+    //       "A game by http://phen.itch.io! ",
+    //       styleAcheivo);
+    //     acheivos[7] = { s: button, got: false, text: a_text };
+    // }
+
     input = game.add.inputField(0, 525, {
       font: '18px Arial',
       fill: '#FEFEFE',
@@ -407,6 +448,14 @@ window.onload = function() {
   function update () {
     const dt = game.time.elapsed/1000;
     input.update();
+    if( inGame ) {
+      timeLeft -= dt;
+      timeText.text = "Time: {0}".format(Math.round(timeLeft));
+      if(timeLeft < 0) {
+        ENDING('DIDNOTHING')
+      }
+    }
+
     if (input.focus) {
       // Wait till the user is done typing
     } else if (!inGame) {
@@ -457,8 +506,6 @@ window.onload = function() {
           addCard(condAction.title, condAction.regex)
         }
       }
-      timeLeft -= dt;
-      timeText.text = "Time: {0}".format(Math.round(timeLeft));
     }
   }
 
