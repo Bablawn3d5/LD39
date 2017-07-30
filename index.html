@@ -202,6 +202,9 @@ window.onload = function() {
   "If I go on ONE KNEE I might buy a little more time to think.",
   ]
 
+  var manager;
+  var emitter;
+
   function ENDING (name) {
     text.text = "Type START to begin a new game";
     titleScreen.visible = true;
@@ -273,6 +276,7 @@ window.onload = function() {
     game.load.image('bg', 'assets/main.png');
     game.load.image('title', 'assets/title2.png');
     game.load.image('invis', 'assets/invis.png');
+    game.load.spritesheet('balls', 'assets/ocnfetti.png', 17, 17);
     game.load.spritesheet('face', 'assets/FACE.png', 17, 13);
     game.load.spritesheet('icons', 'assets/overlay.png', 76, 72);
   }
@@ -433,6 +437,18 @@ window.onload = function() {
     eventText.text = "I need to proove myself in this STRONGEST ARM compeitition!";
     eventText.addColor('#fee761', eventText.text.indexOf("STRONGEST"));
     eventText.addColor('#FEFEFE', eventText.text.indexOf("compeitition"));
+
+
+    emitter = game.add.emitter(game.world.centerX, game.world.centerY, 250);
+    emitter.makeParticles('balls', [0, 1, 2, 3, 4, 5]);
+    emitter.minParticleSpeed.setTo(-400, -400);
+    emitter.maxParticleSpeed.setTo(400, 1400);
+    emitter.gravity = 10;
+    emitter.forEach(function(particle) {
+      particle.body.allowGravity = false;
+    }, this);
+    emitter.start(false, 6000, 15);
+    game.time.events.add(6000, function() {emitter.on = false}, this);
   }
 
   function restart() {
