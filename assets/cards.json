@@ -1,4 +1,4 @@
-var DATA = [
+[
 	{
 		"title": "START",
 		"tags": "",
@@ -12,10 +12,10 @@ var DATA = [
 	{
 		"title": "LIFT",
 		"tags": "",
-		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> LIFT << lifted(2) >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK)(?:ABOUT)?(\\w+)\\b [[THINK]]\n-> MEDIDATE [[MEDITATE]]\n-> GROW [[GROW]]",
+		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> LIFT << lifted(2) >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK) (?:ABOUT )?(\\w+)\\b [[THINK]]\n-> MEDIDATE [[MEDITATE]]\n-> GROW [[GROW]]",
 		"position": {
-			"x": 449,
-			"y": 158
+			"x": 448,
+			"y": 148
 		},
 		"colorID": 6
 	},

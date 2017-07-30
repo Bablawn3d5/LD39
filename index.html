@@ -11,7 +11,6 @@ body, html {
 <title>LD39: Herkuel the Strong Arm</title>
 <script src="js/phaser.min.js"></script>
 <script src="js/phaser-input.js"></script>
-<script src="assets/cards.json"></script>
 </head>
 <body><script type="text/javascript">
 
@@ -58,15 +57,34 @@ window.onload = function() {
 
   };
 
-  Objects.parseData = function(YarnData) {
-    // Re-map raw JSON to some useful obj
+  // RETURNS gamedata
+  Objects.getYarnDATA = function() {
+    // Should really be AJAX'd but whatever let the page stall a bit while
+    // it loads.
+    let data;
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'assets/cards.json', false); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            data = xobj.responseText;
+          }
+    };
+    xobj.send(null);
+    let YarnData = JSON.parse(data);
+    // Re-map raw JSON to some useful obj.
     let obj = {}
     for(let i = 0; i < YarnData.length; i++) {
       obj[YarnData[i].title.toUpperCase()] = YarnData[i];
     };
+    return obj;
+  }
 
+  Objects.parseData = function(obj, id) {
+    id = id || "START";
     // Use hardcoded START key as the indicator of where to begin parsing.
-    let actions = Objects.createActions(obj, obj["START"], []);
+    let actions = Objects.createActions(obj, obj[id], []);
     // Reverse actions so later actions get regex priority over older actions.
     return actions.reverse();
   };
@@ -167,6 +185,8 @@ window.onload = function() {
     text.anchor.x = 0;
     text.anchor.y = 0.8;
     eventText = game.add.text(0, 0, "I'll need your help with this STRONGEST ARM compeitition! I don't have much time.", style);
+    eventText.addColor('#fee761', eventText.text.indexOf("STRONGEST"));
+    eventText.addColor('#FEFEFE', eventText.text.indexOf("compeitition"));
     eventText.anchor.x = 0;
     eventText.anchor.y = 0.9;
     eventText.setTextBounds(20, 525, 768, 56);
@@ -175,8 +195,8 @@ window.onload = function() {
     input.focusOutOnEnter = true;
     //start with focus on the element
     input.startFocus();
-    actions = Objects.parseData(DATA);
-    defaultAction = actions.splice(actions.indexOf(function(e) { e.title == "DEFAULT" }), 1);
+    actions = Objects.parseData(Objects.getYarnDATA());
+    defaultAction = actions.splice(actions.findIndex(function(e) { return e.match("<<DEFAULT") }), 1)[0];
     currentAction = defaultAction;
   }
 
