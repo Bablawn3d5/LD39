@@ -2,7 +2,7 @@
 	{
 		"title": "START",
 		"tags": "",
-		"body": "-> LIFT [[LIFT]]\n-> GO|STILL [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP [[SHIT]]\n-> DROP [[ATTEMPT DROP]]\n-> DEFAULT2 <<timerLessThan(10)>> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> DONOTHING [[DID NOTHING]]",
+		"body": "-> LIFT [[LIFT]]\n-> GO|STILL [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> DEFAULT2 << timerLessThan(10) >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> DONOTHING [[DID NOTHING]]",
 		"position": {
 			"x": 132,
 			"y": 375
@@ -12,20 +12,20 @@
 	{
 		"title": "LIFT",
 		"tags": "",
-		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> LIFT << lifted(2) >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK) (?:ABOUT )?(\\w+)\\b [[THINK]]\n-> MEDIDATE [[MEDITATE]]\n-> GROW [[GROW]]",
+		"body": "I'll keep trying to $c1LIFT$c0 this thing.\nI'm $c1LIFTING$c0 as hard as I can!!\nI $c1THINK$c0 I CAN DO ANYTHING IF I TRY HARD ENOUGH!!\n\n-> LIFT << lifted(3) >> [[LIFT GOOD]]\n-> (?:DISTRACT|THINK) (?:ABOUT )?(\\w+)\\b [[THINK]]\n-> MEDIDATE [[MEDITATE]]\n-> GROW << lifted(3) >> [[GROW]]",
 		"position": {
-			"x": 448,
-			"y": 148
+			"x": 449,
+			"y": 149
 		},
 		"colorID": 6
 	},
 	{
 		"title": "DEFAULT",
 		"tags": "",
-		"body": "Uhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 do that\nI just gotta keep $c1LIFTING$c0 until I feel like I can do this ONE HANDED!",
+		"body": "Uhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 about that stuff\nI just gotta keep $c1LIFTING$c0 until I feel like I can do this $c1ONE HANDED$c0!",
 		"position": {
-			"x": -273,
-			"y": 433
+			"x": -7,
+			"y": 42
 		},
 		"colorID": 4
 	},
@@ -72,7 +72,7 @@
 	{
 		"title": "THINK",
 		"tags": "",
-		"body": "Okay I'll think about $sub\n\n-> THINK<<DISTRACTED>>[[ZEN]]",
+		"body": "Okay I'll think about $sub\n\n-> THINK<< isDistracted() >>[[ZEN]]",
 		"position": {
 			"x": 907,
 			"y": 632
@@ -122,7 +122,7 @@
 	{
 		"title": "MEDITATE",
 		"tags": "",
-		"body": "Okay I'll meditate about $sub \n\n-> Medidate<<DISTRACTED>>[[ZEN]] \n",
+		"body": "Okay I'll meditate about $sub \n\n-> Medidate<< isDistracted() >>[[ZEN]] \n",
 		"position": {
 			"x": 910,
 			"y": 405
@@ -142,7 +142,7 @@
 	{
 		"title": "ZEN",
 		"tags": "",
-		"body": "Not a care in the world\n<< ENDING(ZEN) >>",
+		"body": "Not a care in the world << ENDING(ZEN) >>",
 		"position": {
 			"x": 1483,
 			"y": 635
@@ -152,7 +152,7 @@
 	{
 		"title": "ATTEMPT DROP",
 		"tags": "",
-		"body": "No way I'm not loosing this compeitition. I'm going to keep $c1LIFTING$c0 till I can't $c1LIFT$c0 anymore!",
+		"body": "No way I'm not loosing this compeitition. I'm going to keep both hands on the bar untill I've $c1LIFT$c0 this bar high enough!",
 		"position": {
 			"x": -273,
 			"y": 681
@@ -174,7 +174,7 @@
 		"tags": "",
 		"body": "Intresting? Grow a $sub ? Well I did say I can do anything. What am I growing again?\n\n-> GROW WINGS [[FLYAWAY]]\n-> GROW ARM|LEG|CHEST|HEAD [[MUTANT]]",
 		"position": {
-			"x": 912,
+			"x": 908,
 			"y": 180
 		},
 		"colorID": 6
@@ -194,8 +194,8 @@
 		"tags": "",
 		"body": "<< ENDING(DIDNOTHING) >>",
 		"position": {
-			"x": -266,
-			"y": 190
+			"x": -554,
+			"y": 198
 		},
 		"colorID": 3
 	},
@@ -228,5 +228,45 @@
 			"y": 192
 		},
 		"colorID": 3
+	},
+	{
+		"title": "LOOK2",
+		"tags": "",
+		"body": "I'M JUST TOO FOCUSED TO DO ANYTHING ELSE BUT $c1LIFT$c0!!!",
+		"position": {
+			"x": 134,
+			"y": -656
+		},
+		"colorID": 0
+	},
+	{
+		"title": "STRONGEST ARM",
+		"tags": "",
+		"body": "The compeition is about who in the world has the $c1STRONGEST ARM$c0. I stand here to proove my worth, but I feel like I'm loosing power.",
+		"position": {
+			"x": -557,
+			"y": 673
+		},
+		"colorID": 5
+	},
+	{
+		"title": "TIME",
+		"tags": "",
+		"body": "I really don't want to think about how long I've got left\nI think my arm is sore. Is this normal? Thats normal right?\nHow can anyone really do this without thinking about it?",
+		"position": {
+			"x": -561,
+			"y": 437
+		},
+		"colorID": 5
+	},
+	{
+		"title": "JOKE",
+		"tags": "",
+		"body": "$c1JOKE$c0? Sure! What do you call a $c1ONE ARMED$c0 bandit? A slot machine!\n$c1JOKE$c0? HAH! What has ",
+		"position": {
+			"x": -272,
+			"y": 82
+		},
+		"colorID": 5
 	}
 ]
