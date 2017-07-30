@@ -62,7 +62,7 @@
 	{
 		"title": "LIFT WILLPOWER",
 		"tags": "",
-		"body": "I GOT $c1TWO HANDS$c0 ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> (TWO)?\\s*(?:HAND|ARM|HANDED|ARMED) [[TWO ARM]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR [[FOCUS]]\n-> FOCUS [[FOCUS]]\n-> TIME [[FOCUS]]\n-> JOKE [[JOKE]]\n-> HELP [[HELP2]]\n",
+		"body": "I GOT $c1TWO HANDS$c0 ON THE $c1BAR$c0. I CAN DO THIS.\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH\nI'M ALREADY $C1LIFTING$c0 AS HARD AS I CAN\n**INCOMPREHENSIBLE GRUNTING**\n**HEAVY BREATHING**\nJUST KEEP $c1LIFTING$c0??!?\n$c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!? $c1LIFT$c0??!?\n\n-> LOOK [[LOOK2]]\n-> DEFAULT [[DEFAULT2]]\n-> LIFT << condAction.parent.count > 6 >>[[RAWPOWER]]\n-> (TWO)?\\s*(?:HAND|ARM|HANDED|ARMED) [[TWO ARM]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[DROP ARM]]\n-> GO|NORTH|SOUTH|EAST|WEST [[GO2]]\n-> BAR [[FOCUS]]\n-> FOCUS [[FOCUS]]\n-> TIME [[FOCUS]]\n-> JOKE [[JOKE2]]\n-> HELP [[HELP2]]\n",
 		"position": {
 			"x": 589,
 			"y": -624
@@ -264,8 +264,8 @@
 		"tags": "",
 		"body": "I ain't going down anymore. I feel like that'd crush me. Not the physical me, but my pride!",
 		"position": {
-			"x": -304,
-			"y": -344
+			"x": -177,
+			"y": -295
 		},
 		"colorID": 4
 	},
@@ -360,13 +360,13 @@
 		"colorID": 5
 	},
 	{
-		"title": "JOKE",
+		"title": "JOKE2",
 		"tags": "",
 		"body": "NO TIME FOR JOKES. I. AM. ALMOST. THERE!!!!!!!!!!!!!",
 		"position": {
-			"x": 833,
-			"y": -1131
+			"x": 829,
+			"y": -1128
 		},
-		"colorID": 0
+		"colorID": 5
 	}
 ]
