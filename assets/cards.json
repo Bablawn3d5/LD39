@@ -2,7 +2,7 @@
 	{
 		"title": "START",
 		"tags": "",
-		"body": "-> LIFT [[LIFT]]\n-> GO|STILL [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> DEFAULT2 << timerLessThan(10) >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> DONOTHING [[DID NOTHING]]",
+		"body": "-> LIFT [[LIFT]]\n-> GO|STILL [[GO]]\n-> LOOK[[LOOK]]\n-> HOLD|CARRY [[USE]]\n-> SHIT|POOP|FART [[SHIT]]\n-> DROP|ONE (?:HAND|ARM|HANDED|ARMED) [[ATTEMPT DROP]]\n-> ONE KNEE [[ONE KNEE]]\n-> DEFAULT2 << timerLessThan(10) >> [[DEFAULT2]]\n-> DEFAULT [[DEFAULT]]\n-> STRONGEST ARM [[STRONGEST ARM]]\n-> TIME [[TIME]]\n-> JOKE [[JOKE]]\n-> DONOTHING [[DID NOTHING]]",
 		"position": {
 			"x": 132,
 			"y": 375
@@ -24,8 +24,8 @@
 		"tags": "",
 		"body": "Uhh What?\nI don't know what you mean\nHUH?\nI don't $c1THINK$c0 about that stuff\nI just gotta keep $c1LIFTING$c0 until I feel like I can do this $c1ONE HANDED$c0!",
 		"position": {
-			"x": -7,
-			"y": 42
+			"x": -295,
+			"y": -90
 		},
 		"colorID": 4
 	},
@@ -262,11 +262,31 @@
 	{
 		"title": "JOKE",
 		"tags": "",
-		"body": "$c1JOKE$c0? Sure! What do you call a $c1ONE ARMED$c0 bandit? A slot machine!\n$c1JOKE$c0? HAH! What has ",
+		"body": "$c1JOKE$c0? Who lost last year's $c1STRONGEST ARM$c0 compeition? A spider!\n$c1JOKE$c0? Sure! What do you call a $c1ONE ARMED$c0 bandit? A slot machine!\n$c1JOKE$c0? HAH! What has eight legs and no arms? A spider!",
 		"position": {
-			"x": -272,
-			"y": 82
+			"x": -551,
+			"y": -23
 		},
 		"colorID": 5
+	},
+	{
+		"title": "ONE KNEE",
+		"tags": "",
+		"body": "Okay I drop down to $c1ONE KNEE$c0. Thats a bit of a relief! << giveTime(60); oneKnee = true; >> \n\n-> ONE KNEE << onOneknee() >>[[REFUSE]]",
+		"position": {
+			"x": -16,
+			"y": -82
+		},
+		"colorID": 1
+	},
+	{
+		"title": "REFUSE",
+		"tags": "",
+		"body": "I ain't going down anymore. I feel like that'd crush not me, but my pride!",
+		"position": {
+			"x": -300,
+			"y": -344
+		},
+		"colorID": 4
 	}
 ]

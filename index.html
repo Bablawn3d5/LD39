@@ -43,9 +43,8 @@ window.onload = function() {
   };
 
   Objects.action.prototype.printTextObj = function(textObj) {
-    this.currentTextIndex++;
+    let text = this.texts[this.currentTextIndex++];
     this.currentTextIndex = this.currentTextIndex % this.texts.length;
-    let text = this.texts[this.currentTextIndex];
     // Check if we need color replace
     const color_lookup = {
       0: "#FEFEFE", //Plain
