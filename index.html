@@ -211,6 +211,8 @@ window.onload = function() {
     inGame = false;
     if(name == "SHIT") {
       acheivos[1].got = true;
+      confetti(acheivos[1].s.x, acheivos[1].s.y);
+
     } else if ( name == "DIDNOTHING" ) {
       eventText.colors = [];
       eventText.text = "Oops, I couldn't hold that bar up any longer. " + hints[hint];
@@ -218,20 +220,25 @@ window.onload = function() {
       hint = hint % hints.length;
     } else if ( name == "ZEN" ) {
       acheivos[2].got = true;
+      confetti(acheivos[2].s.x, acheivos[2].s.y);
 
     } else if ( name == "FLYAWAY" ) {
       acheivos[3].got = true;
+      confetti(acheivos[3].s.x, acheivos[3].s.y);
 
     } else if ( name == "MUTANT" ) {
       acheivos[6].got = true;
+      confetti(acheivos[6].s.x, acheivos[6].s.y);
 
     } else if ( name == "OOPS" ) {
 
     } else if ( name == "IHAVETHEPOWER" ) {
       acheivos[5].got = true;
+      confetti(acheivos[5].s.x, acheivos[5].s.y);
 
     } else if ( name == "STRONGESTARM" ) {
       acheivos[4].got = true;
+      confetti(acheivos[4].s.x, acheivos[4].s.y);
 
     }
     Object.keys(acheivos).forEach(function (key) {
@@ -447,6 +454,11 @@ window.onload = function() {
     emitter.forEach(function(particle) {
       particle.body.allowGravity = false;
     }, this);
+  }
+
+  function confetti(x,y) {
+    emitter.x = x || emittey.x;
+    emitter.y = y || emitter.y;
     emitter.start(false, 6000, 15);
     game.time.events.add(6000, function() {emitter.on = false}, this);
   }
