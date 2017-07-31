@@ -183,6 +183,7 @@ window.onload = function() {
   var isFocused;
   var isARGED;
   var inGame = false;
+  var ccount = 0;
 
   var face;
   var group;
@@ -283,6 +284,7 @@ window.onload = function() {
     game.load.crossOrigin = "Anonymous"
     // Assets here.
     game.load.image('bg', 'assets/main.png');
+    game.load.image('bg3', 'assets/main3.png');
     game.load.image('bg2', 'assets/main2.png');
     game.load.image('title', 'assets/title2.png');
     game.load.image('invis', 'assets/invis.png');
@@ -470,7 +472,9 @@ window.onload = function() {
     oneKnee = false;
     isDistracted = false;
     isFocused = false;
+    isARGED = false;
     timeLeft = 122.5;
+    ccount = 0;
     defaultAction = removeCard("DEFAULT")[0];
     currentAction = defaultAction;
     text.text = "I should do something";
@@ -501,11 +505,23 @@ window.onload = function() {
   function update () {
     const dt = game.time.elapsed/1000;
     input.update();
+
+    // GAME STUCFF HACK WHATEVVVERRR
     if( inGame ) {
       timeLeft -= dt;
       timeText.text = "STRENGTH: {0}".format(Math.round(timeLeft));
       if(timeLeft < 0) {
         ENDING('DIDNOTHING')
+      }
+      if ( isARGED == true && ccount == 0){
+        ccount++;
+        BG.destroy();
+        BG = group.create(0, 0, 'bg2');
+      }
+      if ( isTrapped == true && ccount < 2){
+        ccount++;
+        BG.destroy();
+        BG = group.create(0, 0, 'bg3');
       }
     }
 
@@ -522,10 +538,6 @@ window.onload = function() {
       input.startFocus();
     }
     else {
-      if ( isARGED == true ){
-        BG.destroy();
-        BG = group.create(0, 0, 'bg2');
-      }
       // In the game
       let playerText = getText();
       const foundAction = actions.find(function(element) {
